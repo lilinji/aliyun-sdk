@@ -5,7 +5,7 @@
 <img src="https://img.shields.io/hexpm/l/plug.svg"></img>
 [![release](https://img.shields.io/github/release/guohongze/adminset.svg)](https://github.com/lilinji/transmission)
 <br>
-transmission基于DevOps理念开发，以整合全部运维场景为己任。aliyun-sdk是一个真正的基于运维思维而开发的全自动化SDK。<br>
+基于DevOps理念开发，以整合全部运维场景为己任。aliyun-sdk是一个真正的基于运维思维而开发的全自动化SDK。<br>
 
 ## v1.0.1 新功能
 自动查找ECS主机列表.<br>

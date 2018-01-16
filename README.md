@@ -1,17 +1,17 @@
 # transmission
-用于传输本地NAS 存储和阿里云NAS存储的SDK封装
+用于排查ECS 阿里云主机列表 并针对操作的SDK封装
 # AdminSet
 <img src="https://travis-ci.org/guohongze/adminset.svg?branch=master"></img> 
 <img src="https://img.shields.io/hexpm/l/plug.svg"></img>
 [![release](https://img.shields.io/github/release/guohongze/adminset.svg)](https://github.com/lilinji/transmission)
 <br>
-transmission基于DevOps理念开发，以整合全部运维场景为己任。transmission是一个真正的基于运维思维而开发的全自动化并发数据传输系统。<br>
+transmission基于DevOps理念开发，以整合全部运维场景为己任。aliyun-sdk是一个真正的基于运维思维而开发的全自动化SDK。<br>
 
 ## v1.0.1 新功能
-自动配置config文件.<br>
-自动指定 读线程 传输线程.<br>
-需要指定原数据路径（目录）<br>
-需要指定目的数据路径（目录）<br>
+自动查找ECS主机列表.<br>
+自动指定查找SGE宕机主机.<br>
+无需人工参与<br>
+方便排查down 机列表<br>
 
 ## 开发环境
 centos 7.4(1708)  vim （兼容 Notes） python 2.7 兼容（3.4）<br>
@@ -22,7 +22,7 @@ centos 7.4(1708)  vim （兼容 Notes） python 2.7 兼容（3.4）<br>
 服务器操作系统版本要求 centos6.0及以上<br>
 安装过程不需要任何操作<br>
 ```
-git clone https://github.com/lilinji/transmission.git
+git clone https://github.com/lilinji/aliyun-sdk.git
 ```
 
 
@@ -48,21 +48,21 @@ python setup.py install
 #### step2:
 拷贝源码到指定主机上并执行:
 ```
-sh rsync_data.sh /srcdir/  /desdir/
+sh all.sh
 ```
 
 后台运行请参考：
 ```
-nohup java -jar nasimport-v0.1.jar -cc config >master.log 2>&1 &
+aliyuncli ecs DescribeInstances --RegionId $1 --PageSize 100 --PageNumber $pageNum --output json  >>ECS_JSON.txt
 ```
 
 ## 访问
-https://github.com/lilinji/transmission.git 
+https://github.com/lilinji/aliyun-sdk
 
 
 ## 说明
-使用请转到，<a href="https://github.com/lilinji/transmission/README">使用说明</a><br>
-功能请转到，<a href="https://github.com/lilinji/transmission/blob/master/transmission/rsync_data.py">功能说明</a><br>
+使用请转到，<a href="https://github.com/lilinji/aliyun-sdk/README">使用说明</a><br>
+功能请转到，<a href="https://github.com/lilinji/">功能说明</a><br>
 FAQ请转到，<a href="https://www.baidu.com">常见问题</a>
 
 # 安全
@@ -76,13 +76,5 @@ FAQ请转到，<a href="https://www.baidu.com">常见问题</a>
 --------补充-----------
 
 
-工具运行需要JDK 7或以上版本
 
-1, 修改config文件最上面的参数。
-    REPLACE_SRC_DIR: 原始数据的目录, 比如 /data/src/, D:\data\src\
-    REPLACE_DST_DIR: 要拷贝的目的目录, 比如  /mnt/nas/, Z:\data\
-    REPLACE_THREADS: 并发数。
-2，运行
-    直接跑： java -jar nasimport-v0.1.jar -cc config
-    后台跑： nohup java -jar nasimport-v0.1.jar -cc config 2>&1 &
 

@@ -21,8 +21,40 @@
 # prepare the host and then execute all the tox tests.
 #
 
+
+
+
+## Shell Opts ----------------------------------------------------------------
+set -xeu
+
+## Vars ----------------------------------------------------------------------
+
+export WORKING_DIR=${WORKING_DIR:-$(pwd)}
+
+## Main ----------------------------------------------------------------------
+
+source /etc/os-release || source /usr/lib/os-release
+
+install_pkg_deps() {
+    pkg_deps="git"
+
+    # Prefer dnf over yum for CentOS.
+    which dnf &>/dev/null && RHT_PKG_MGR='dnf' || RHT_PKG_MGR='yum'
+
+    case ${ID,,} in
+        *suse*) pkg_mgr_cmd="zypper -n in" ;;
+        centos|rhel|fedora) pkg_mgr_cmd="${RHT_PKG_MGR} install -y" ;;
+        ubuntu|debian) pkg_mgr_cmd="apt-get install -y" ;;
+        *) echo "unsupported distribution: ${ID,,}"; exit 1 ;;
+    esac
+
+    eval sudo $pkg_mgr_cmd $pkg_deps
+}
+
+install_pkg_deps
+
 ####install git
-yum install git -y 
+#yum install git -y 
 
 INFLAMMATORY=`lsb_release -a |grep 'CentOS Linux release 7'` 
 #SWAPPINESS=(sysctl -a | grep vm.swappiness | awk -F ' = ' '{print \$2}')

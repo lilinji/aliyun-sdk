@@ -64,12 +64,12 @@ if [ "$INFLAMMATORY" ];then
 Anything... install Centos7 Aliyun SDK...
 "
      sleep 3
-      git clone https://github.com/lilinji/hpc-sdk.git
+      git clone https://github.com/lilinji/DARYU-SGE.git
 else
      echo -e "I have never meet anyone who ram a production ready Arch Linux 
 Anything... And you think  install Centos6 Aliyun SDK...
 "    
      sleep 2
-      git clone https://github.com/lilinji/hpc-sdk2.git
+      git clone https://github.com/lilinji/WUKONG-SGE.git
      sleep 2
 fi
